@@ -15,6 +15,7 @@ import streamlit as st
 import plotly_express as px
 from streamlit_option_menu import option_menu
 st.set_page_config(layout="wide")
+my_path = ""
 
 # creating option menu for the webapp
 
@@ -30,8 +31,8 @@ with st.sidebar:
 
 # load in dataset + basic cleaning
 
-untouched = pd.read_csv('D:\heart.csv')
-df = pd.read_csv('D:\heart.csv').astype(int)
+untouched = pd.read_csv(my_path + 'heart.csv')
+df = pd.read_csv(my_path + 'heart.csv').astype(int)
 df = df.drop('Diabetes', axis = 1)
 num_cols = ['BMI', 'Age']
 
@@ -101,7 +102,7 @@ if sideselect == 'Data Selection':
     
     st.header("Data Exploration")
     st.write("This is the whole untouched dataset:")
-    st.write(pd.read_csv('D:\heart.csv'))
+    st.write(pd.read_csv(my_path + 'heart.csv'))
     st.info("*You can adjust the display of the dataset's size by dragging the small white square in the bottom right corner of the dataset. You can also adjust the columns' width.*")
     st.write("Ok, let's dive right into this dataset.")
     st.write("This dataset consists of 22 columns with one columns indicating whether the patient has heart disease or not. So, we are left with 21 features that we can use for prediction.")
