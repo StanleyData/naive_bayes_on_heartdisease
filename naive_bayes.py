@@ -18,8 +18,8 @@ st.set_page_config(layout="wide")
 
 # load in dataset + basic cleaning
 
-untouched = pd.read_csv('D:/heart.csv')
-df = pd.read_csv('D:/heart.csv').astype(int)
+untouched = pd.read_csv('heart.csv')
+df = pd.read_csv('heart.csv').astype(int)
 df = df.drop('Diabetes', axis = 1)
 num_cols = ['BMI', 'Age',  'GenHlth', 'MentHlth', 'PhysHlth', 'Education', 'Income']
 
