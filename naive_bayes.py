@@ -200,36 +200,7 @@ if sideselect == 'Data Exploration':
         if subbox:
             selected_box = [k for k,v in num_col_dict.items() if v in boxlist]
             container8.plotly_chart(px.box(df, x = 'HeartDiseaseorAttack', y = selected_box[0], color = 'HeartDiseaseorAttack', title = 'Interactive Box Plot'), use_container_width = True)
-            
-    st.write("When we are judging according to a box plot whether if a numerical column is suitable for a model, we should consider 4 things.")
-    st.write("1. The **Range** of the Box Plot: If the range is too large or too small, it may not be suitable for a model. If the range is too small, the model may not be able to distinguish between different values. If the range is too large, the model may not be able to capture the nuances of the data.")
-    st.write("2. The **Outliers**: Look for any outliers in the boxplot. The outliers are dots situated above the upper whisker or below the lower whisker. Outliers can indicate that the data is not normally distributed, which can affect the performance of some models. Additionally, outliers can have a disproportionate effect on the model, skewing the results.")
-    st.write("3. The **Skewness**: If the data is highly skewed (meaning that it is not symmetrically distributed), it may not be suitable for a model that assumes a normal distribution, like the naive bayes model.")
-    st.write("4. The **Median** and the **Quartiles**: If the median and quartiles are close together, the data may be too homogenous and may not provide enough information for a model.")
-            
-            
-    col3, col4 = st.columns([3, 5])
-    col3.header("Interactive Chi-Squared Test")
-    col3.write("Here's an interactive chi-squared test tool that lets you select a column and returns the relationship value between the it and the target column, which is Heart Disease.")
-    col3.write("The relationship value is called a 'p-value'. For columns that have a strong relationship, the p-value is usually 0.05 or less.")
-    with st.form("2"):
-        selected_col = col4.selectbox("Please select a column:", cat_col_dict.values())
-        sub1 = st.form_submit_button('Submit To Run Chi-Squared Test')
-        if sub1:
-            col4.success('Chi-squared Test Performed')
-            selected_ = [k for k,v in cat_col_dict.items() if v == selected_col][0]
-            res = chi2_contingency(pd.crosstab(df['HeartDiseaseorAttack'], df[selected_]))[0:2]
-            st.write("The chi-square stat is:", res[0])
-            st.write("The p-value is:", res[1])
-            if res[1] <= 0.05:
-                st.write("This column is very relevant with the target column.")
-    st.write('Chi-squared tests are very complicated when it comes to lots of high-quality data like the data we have. As you can see, a chi-squared test returns 2 useful values to us, the p-value and the chi-squared value. Please run the test above and take a look at the outcome. If you ran the test for all of the columns, you should find that some columns have a p-value of 0.0 . This tells us that the columns are associated to a big extent. Which is a good thing.')
-    st.write("But, even if we have lots of columns that have strong association with each other, we cannot include all of them. Including lots of columns in a model may cause problems like overfitting and the curse of dimensionality.")
-    st.write("[Overfitting](https://www.ibm.com/topics/overfitting) is when your model starts to memorize the training data instead of adapting well to new data. Which causes the model to perform well on the training data but poorly on new, unseen data.")
-    st.write("The curse of dimensionality is also a very confusing problem with machine learning models. The term was invented by some computer programmers. The amount of data the model needs for it to reach a certain accuracy gets higher and higher, when you train the model with more columns.")
-    st.write("That's why we need to select the most useful columns that have the strongest relation with the target.")
-    st.write("So, here is when the chi-square statistic comes into play. When all of the columns have miniscule p-values, and we couldn't judge which column is better, we observe the chi-square value. A bigger chi-squared value means the observed frequencies differ significantly from the expected frequencies, which can happen when there is a strong association between the variables being tested. So, by measuring the chi-squared statistic, we can find the columns we need the most.")
-
+                        
 
 if sideselect == 'Explaining Naive Bayes':
     
@@ -365,6 +336,14 @@ if sideselect == 'Feature Selection':
             st.write("The p-value is:", res[1])
             if res[1] <= 0.05:
                 st.write("This column is very relevant with the target column.")
+		
+    st.write('Chi-squared tests are very complicated when it comes to lots of high-quality data like the data we have. As you can see, a chi-squared test returns 2 useful values to us, the p-value and the chi-squared value. Please run the test above and take a look at the outcome. If you ran the test for all of the columns, you should find that some columns have a p-value of 0.0 . This tells us that the columns are associated to a big extent. Which is a good thing.')
+    st.write("But, even if we have lots of columns that have strong association with each other, we cannot include all of them. Including lots of columns in a model may cause problems like overfitting and the curse of dimensionality.")
+    st.write("[Overfitting](https://www.ibm.com/topics/overfitting) is when your model starts to memorize the training data instead of adapting well to new data. Which causes the model to perform well on the training data but poorly on new, unseen data.")
+    st.write("The curse of dimensionality is also a very confusing problem with machine learning models. The term was invented by some computer programmers. The amount of data the model needs for it to reach a certain accuracy gets higher and higher, when you train the model with more columns.")
+    st.write("That's why we need to select the most useful columns that have the strongest relation with the target.")
+    st.write("So, here is when the chi-square statistic comes into play. When all of the columns have miniscule p-values, and we couldn't judge which column is better, we observe the chi-square value. A bigger chi-squared value means the observed frequencies differ significantly from the expected frequencies, which can happen when there is a strong association between the variables being tested. So, by measuring the chi-squared statistic, we can find the columns we need the most.")
+
     
     
     st.header("Feature Selection of Numeric Variables")
@@ -374,6 +353,12 @@ if sideselect == 'Feature Selection':
     boxfig.update_layout(showlegend = False)
     boxfig.update_yaxes(matches=None, title_text = '')
     st.plotly_chart(boxfig)
+    st.write("When we are judging according to a box plot whether if a numerical column is suitable for a model, we should consider 4 things.")
+    st.write("1. The **Range** of the Box Plot: If the range is too large or too small, it may not be suitable for a model. If the range is too small, the model may not be able to distinguish between different values. If the range is too large, the model may not be able to capture the nuances of the data.")
+    st.write("2. The **Outliers**: Look for any outliers in the boxplot. The outliers are dots situated above the upper whisker or below the lower whisker. Outliers can indicate that the data is not normally distributed, which can affect the performance of some models. Additionally, outliers can have a disproportionate effect on the model, skewing the results.")
+    st.write("3. The **Skewness**: If the data is highly skewed (meaning that it is not symmetrically distributed), it may not be suitable for a model that assumes a normal distribution, like the naive bayes model.")
+    st.write("4. The **Median** and the **Quartiles**: If the median and quartiles are close together, the data may be too homogenous and may not provide enough information for a model.")
+
     
         
 if sideselect == 'Conclusion':
