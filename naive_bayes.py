@@ -298,6 +298,7 @@ if sideselect == 'Interactive Classifier':
         preds = (pred_series0 < pred_series1) * 1
         accuracy = np.mean(preds == df[target_col_name])
         st.write('The accuracy is:', accuracy)
+	st.write('The number of zeros predicted is', preds.value_counts())
         
         
         return pd.DataFrame(zip(df[target_col_name], preds), columns = ['Actual', 'Preds'])
