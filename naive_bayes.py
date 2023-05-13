@@ -16,7 +16,7 @@ import streamlit as st
 import plotly_express as px
 from streamlit_option_menu import option_menu
 st.set_page_config(layout="wide")
-my_path = 'D:/'
+my_path = ''
 
 
 # load in dataset + basic cleaning
