@@ -138,7 +138,7 @@ if sideselect == "Data Cleaning":
     
     
     st.write("This is the whole untouched dataset:")
-    st.write(pd.read_csv('D:\heart.csv'))
+    st.write(pd.read_csv(my_path + 'heart.csv'))
     st.info("*You can adjust the display of the dataset's size by dragging the small white square in the bottom right corner of the dataset. You can also adjust the columns' width.*")
     
     
@@ -383,7 +383,7 @@ if sideselect == 'Feature Selection':
         
 if sideselect == 'Conclusion':
     st.title('Project Conclusion')
-    st.write("This project explored Heart Disease and its factors deeply based on a Naive Bayes Classifier. From the chi-squared test we got to know that General Health, Difficulty in Walking, High Blood Pressure and Stroke has the most influence on deciding whether if a person has Heart Disease or not. From the Naive Bayes Classfier, we came to the same conclusion.")
+    st.write("This project explored Heart Disease and its factors deeply based on a Naive Bayes Classifier. From the chi-squared test we got to know that General Health, Difficulty in Walking, High Blood Pressure and Stroke has the most influence on deciding whether a person has Heart Disease or not. From the Naive Bayes Classfier, we came to the same conclusion.")
     st.write("According to lots of sources (CDC, HealthLine and Mayo Clinic), the factors I mentioned above are very important causes of heart disease. So, this shows that our conclusions fit the advice from prestigious sources.")
     st.write("But, because no model is perfect, the best model we can create with the interactive classifier in the above section has an accuracy of 90.58 percent. This percentage is equal to the proportion of zeros in our target column, which means that the model is predicting zero for every prediction it does. Why did we get a model like this? This is because the data we put our model through is very imbalanced. It has lots of zeros and a miniscule amount of ones, so the model starts predicting 0 for all of them.")
     st.write("In the future, I can find a model with better adaptation for any kind of data, and try to achieve a better result on predicting heart disease with the same dataset that we have.")
